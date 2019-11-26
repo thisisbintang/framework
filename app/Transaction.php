@@ -14,10 +14,10 @@ class Transaction extends Model
     protected $table = 'transactions';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -25,7 +25,7 @@ class Transaction extends Model
      *
      * @var array
      */
-    protected $fillable = ['transactionCode', 'stockOut'];
+    protected $fillable = ['transactionCode', 'stockOut', 'totalPrice', 'itemCode'];
 
 
 }

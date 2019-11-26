@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Good;
+use App\Http\Requests\StoreStocks;
 use App\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class StocksController extends Controller
@@ -28,14 +30,14 @@ class StocksController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 5;
 
         if (!empty($keyword)) {
             $stocks = Stock::where('itemCode', 'LIKE', "%$keyword%")
                 ->orWhere('stockEntry', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+                ->paginate($perPage);
         } else {
-            $stocks = Stock::latest()->paginate($perPage);
+            $stocks = Stock::paginate($perPage);
         }
 
         return view('stocks.index', compact('stocks'));
@@ -60,12 +62,16 @@ class StocksController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreStocks $request)
     {
 
         $requestData = $request->all();
 
         Stock::create($requestData);
+
+        $good = Good::where('itemCode', $request->itemCode)->first();
+        $stock = $good->stock + $request->stockEntry;
+        DB::table('goods')->where('itemCode', $request->itemCode)->update(['stock' => $stock]);
 
         return redirect()->route('stocks.index')->with('flash_message', 'Stock added!');
     }

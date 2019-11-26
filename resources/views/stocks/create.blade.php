@@ -7,7 +7,7 @@
 
             <div class="col-md-9">
                 <div class="card">
-                    <div class="card-header">Tambah Stok Barang</div>
+                    <div class="card-header">Tambah Baru Data Stok Barang</div>
                     <div class="card-body">
                         <a href="{{ route('stocks.index') }}" title="Back">
                             <button class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i>

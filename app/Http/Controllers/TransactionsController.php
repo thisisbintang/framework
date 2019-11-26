@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Good;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\StoreTransactions;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionsController extends Controller
 {
@@ -29,14 +32,14 @@ class TransactionsController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 5;
 
         if (!empty($keyword)) {
             $transactions = Transaction::where('transactionCode', 'LIKE', "%$keyword%")
                 ->orWhere('stockOut', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+                ->paginate($perPage);
         } else {
-            $transactions = Transaction::latest()->paginate($perPage);
+            $transactions = Transaction::paginate($perPage);
         }
 
         return view('transactions.index', compact('transactions'));
@@ -68,8 +71,9 @@ class TransactionsController extends Controller
                 $transactionCode = "TR" . '' . ($lastId->id + 1);
             }
         }
+        $goods = Good::get()->where('stock', '>', 0);
 
-        return view('transactions.create', compact('transactionCode'));
+        return view('transactions.create', compact('transactionCode', 'goods'));
     }
 
     /**
@@ -79,14 +83,18 @@ class TransactionsController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request)
+    public function store(StoreTransactions $request)
     {
 
         $requestData = $request->all();
 
         Transaction::create($requestData);
 
-        return redirect('transactions')->with('flash_message', 'Transaction added!');
+        $good = Good::where('itemCode', $request->itemCode)->first();
+        $stock = $good->stock - $request->stockOut;
+        DB::table('goods')->where('itemCode', $request->itemCode)->update(['stock' => $stock]);
+
+        return redirect()->route('transactions.index')->with('flash_message', 'Transaction added!');
     }
 
     /**
@@ -147,6 +155,7 @@ class TransactionsController extends Controller
     {
         Transaction::destroy($id);
 
-        return redirect('transactions')->with('flash_message', 'Transaction deleted!');
+        return redirect()->route('transactions.index')->with('flash_message', 'Transaction deleted!');
     }
+
 }

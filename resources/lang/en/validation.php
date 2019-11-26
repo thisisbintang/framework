@@ -153,6 +153,7 @@ return [
         'price' => 'harga',
         'stockEntry' => 'stok masuk',
         'stockOut' => 'stok keluar',
+        'totalPrice' => 'harga total',
     ],
 
 ];

@@ -50,6 +50,10 @@
                                     <td> {{ $good->color }} </td>
                                 </tr>
                                 <tr>
+                                    <th> Ukuran</th>
+                                    <td> {{ $good->size }} </td>
+                                </tr>
+                                <tr>
                                     <th> Harga</th>
                                     <td> Rp. {{ $good->price }} </td>
                                 </tr>

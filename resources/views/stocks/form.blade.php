@@ -24,8 +24,8 @@
                     class="fa fa-search"></span>
             </button>
         </span>
-        {!! $errors->first('itemCode', '<small class="text-danger">:message</small>') !!}
     </div>
+    {!! $errors->first('itemCode', '<small class="text-danger">:message</small>') !!}
 </div>
 <div class="form-group {{ $errors->has('stockEntry') ? 'has-error' : ''}}">
     <label for="stockEntry" class="control-label">{{ 'Stok Masuk' }}</label>

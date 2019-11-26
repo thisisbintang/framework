@@ -14,10 +14,10 @@ class Stock extends Model
     protected $table = 'stocks';
 
     /**
-    * The database primary key value.
-    *
-    * @var string
-    */
+     * The database primary key value.
+     *
+     * @var string
+     */
     protected $primaryKey = 'id';
 
     /**
@@ -27,5 +27,5 @@ class Stock extends Model
      */
     protected $fillable = ['itemCode', 'stockEntry'];
 
-    
+
 }

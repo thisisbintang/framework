@@ -30,7 +30,7 @@ class GoodsController extends Controller
     public function index(Request $request)
     {
         $keyword = $request->get('search');
-        $perPage = 25;
+        $perPage = 5;
 
         if (!empty($keyword)) {
             $goods = Good::where('itemCode', 'LIKE', "%$keyword%")
@@ -38,12 +38,10 @@ class GoodsController extends Controller
                 ->orWhere('color', 'LIKE', "%$keyword%")
                 ->orWhere('size', 'LIKE', "%$keyword%")
                 ->orWhere('price', 'LIKE', "%$keyword%")
-                ->latest()->paginate($perPage);
+                ->paginate($perPage);
         } else {
-            $goods = Good::latest()->paginate($perPage);
+            $goods = Good::paginate($perPage);
         }
-
-//        $stocks = Stock::all('stockEntry')->where('')
 
         return view('goods.index', compact('goods'));
     }

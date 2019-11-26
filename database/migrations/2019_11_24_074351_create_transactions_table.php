@@ -14,8 +14,8 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('transactionCode');
-            $table->integer('itemCode')->unique();
+            $table->string('transactionCode');
+            $table->integer('itemCode');
             $table->integer('stockOut');
             $table->integer('totalPrice');
             $table->foreign('itemCode')->references('itemCode')->on('goods')->onUpdate('cascade')->onDelete('cascade');

@@ -14,9 +14,9 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('itemCode');
             $table->integer('stockEntry');
-            $table->integer('good_id');
-            $table->foreign('good_id')->references('good_id')->on('goods')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('itemCode')->references('itemCode')->on('goods')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

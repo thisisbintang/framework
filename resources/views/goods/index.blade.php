@@ -16,7 +16,7 @@
                         <form method="GET" action="{{ route('goods.index') }}" accept-charset="UTF-8"
                               class="form-inline my-2 my-lg-0 float-right" role="search">
                             <div class="input-group">
-                                <input type="text" class="form-control" name="search" placeholder="Search..."
+                                <input type="text" class="form-control" name="search" placeholder="Cari..."
                                        value="{{ request('search') }}">
                                 <span class="input-group-append">
                                     <button class="btn btn-secondary" type="submit">
@@ -35,23 +35,19 @@
                                     <th>#</th>
                                     <th>Kode Barang</th>
                                     <th>Stok</th>
-                                    <th>Merk</th>
-                                    <th>Warna</th>
                                     <th>Aksi</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($goods as $item)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ (($goods->currentPage() - 1 ) * $goods->perPage() ) + $loop->iteration }}</td>
                                         <td>{{ $item->itemCode }}</td>
-                                        <td></td>
-                                        <td>{{ $item->brand }}</td>
-                                        <td>{{ $item->color }}</td>
+                                        <td>{{ $item->stock }}</td>
                                         <td>
                                             <a href="{{ route('goods.show', $item->id) }}" title="View Good">
                                                 <button class="btn btn-light btn-sm"><i class="fa fa-eye"
-                                                                                       aria-hidden="true"></i> Lihat
+                                                                                        aria-hidden="true"></i> Lihat
                                                 </button>
                                             </a>
                                             <a href="{{  route('goods.edit', $item->id) }}" title="Edit Good">

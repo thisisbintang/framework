@@ -36,5 +36,7 @@ Route::prefix('cashier')->group(function () {
     Route::get('home', 'Cashier\HomeController@index')->name('cashier.home');
     Route::get('/', 'Cashier\HomeController@index');
     Route::resource('transactions', 'TransactionsController');
+    Route::get('transaction-report', 'TransactionReportController@index')->name('transaction-report.index');
+    Route::get('transaction-report/export-pdf', 'TransactionReportController@exportPDF')->name('transaction-report.export-pdf');
 });
 
