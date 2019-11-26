@@ -46,6 +46,29 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'employee' => [
+            'driver' => 'session',
+            'provider' => 'employees',
+        ],
+
+        'employee-api' => [
+            'driver' => 'token',
+            'provider' => 'employees',
+            'hash' => false,
+        ],
+
+        'cashier' => [
+            'driver' => 'session',
+            'provider' => 'cashiers',
+        ],
+
+        'cashier-api' => [
+            'driver' => 'token',
+            'provider' => 'cashiers',
+            'hash' => false,
+        ],
+
     ],
 
     /*
@@ -69,6 +92,16 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'employees' => [
+            'driver' => 'eloquent',
+            'model' => App\Employee::class,
+        ],
+
+        'cashiers' => [
+            'driver' => 'eloquent',
+            'model' => App\Cashier::class,
         ],
 
         // 'users' => [
@@ -98,6 +131,19 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+
+        'employees' => [
+            'provider' => 'employees',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'cashiers' => [
+            'provider' => 'cashiers',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
     ],
 
 ];
