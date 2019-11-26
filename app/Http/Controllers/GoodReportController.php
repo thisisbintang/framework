@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaction;
-use PDF;
+use App\Good;
 use Illuminate\Http\Request;
+use PDF;
 
-class TransactionReportController extends Controller
+class GoodReportController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +15,7 @@ class TransactionReportController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:cashier');
+        $this->middleware('auth:employee');
     }
 
     /**
@@ -25,13 +25,13 @@ class TransactionReportController extends Controller
      */
     public function index()
     {
-        return view('transaction-report.index');
+        return view('good-report.index');
     }
 
     public function exportPDF()
     {
-        $transactions = Transaction::all();
-        $pdf = PDF::loadView('transaction-report.export-pdf', ['transactions' => $transactions]);
-        return $pdf->download('laporan-data-transaksi');
+        $goods = Good::all();
+        $pdf = PDF::loadView('good-report.export-pdf', ['goods' => $goods]);
+        return $pdf->download('laporan-data-barang');
     }
 }

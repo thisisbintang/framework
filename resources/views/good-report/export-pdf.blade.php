@@ -67,50 +67,56 @@
         }
     </style>
     <link rel="stylesheet" href="">
-    <title>Laporan Data Transaksi</title>
+    <title>Laporan Data Barang</title>
 </head>
 <body>
-<h1 class="center">LAPORAN DATA TRANSAKSI</h1>
+<h1 class="center">LAPORAN DATA BARANG</h1>
 <table id="pseudo-demo">
     <thead>
     <tr>
         <th>
-            Kode Transaksi
-        </th>
-        <th>
             Kode Barang
         </th>
         <th>
-            Stok Keluar
+            Stok
         </th>
         <th>
-            Total Harga
+            Merk
         </th>
         <th>
-            Transaksi Masuk
+            Warna
+        </th>
+        <th>
+            Ukuran
+        </th>
+        <th>
+            Harga (Rp.)
         </th>
     </tr>
     </thead>
     <tbody>
-    @foreach($transactions as $data)
+    @foreach($goods as $data)
         <tr>
             <td class="py-1">
-                {{$data->transactionCode}}
-            </td>
-            <td>
 
                 {{$data->itemCode}}
 
             </td>
 
             <td>
-                {{$data->stockOut}}
+                {{$data->stock}}
             </td>
             <td>
-                {{$data->totalPrice}}
+                {{$data->brand}}
             </td>
             <td>
-                {{$data->created_at}}
+                {{$data->color}}
+            </td>
+            <td>
+                {{$data->size}}
+            </td>
+            <td>
+                {{$data->price}}
             </td>
 
         </tr>

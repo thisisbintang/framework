@@ -13,6 +13,14 @@
                href="{{route('stocks.index')}}">
                 Data Stok Barang
             </a>
+            <a class="list-group-item list-group-item-action {{Route::is('good-report.index')?'active':''}}"
+               href="{{route('good-report.index')}}">
+                Laporan Data Barang
+            </a>
+            <a class="list-group-item list-group-item-action {{Route::is('stock-report.index')?'active':''}}"
+               href="{{route('stock-report.index')}}">
+                Laporan Data Stok Barang
+            </a>
         @endif
         @if(\Illuminate\Support\Facades\Auth::guard('cashier')->check())
             <a class="list-group-item list-group-item-action {{Route::is('cashier.home')?'active':''}}"
@@ -25,7 +33,7 @@
             </a>
             <a class="list-group-item list-group-item-action {{Route::is('transaction-report.index')?'active':''}}"
                href="{{route('transaction-report.index')}}">
-                Laporan Transaksi
+                Laporan Data Transaksi
             </a>
         @endif
     </div>

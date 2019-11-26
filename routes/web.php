@@ -25,6 +25,10 @@ Route::prefix('employee')->group(function () {
     Route::get('/', 'Employee\HomeController@index');
     Route::resource('goods', 'GoodsController');
     Route::resource('stocks', 'StocksController');
+    Route::get('good-report', 'GoodReportController@index')->name('good-report.index');
+    Route::get('good-report/export-pdf', 'GoodReportController@exportPDF')->name('good-report.export-pdf');
+    Route::get('stock-report', 'StockReportController@index')->name('stock-report.index');
+    Route::get('stock-report/export-pdf', 'StockReportController@exportPDF')->name('stock-report.export-pdf');
 });
 
 Route::prefix('cashier')->group(function () {

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Transaction;
-use PDF;
+use App\Stock;
 use Illuminate\Http\Request;
-
-class TransactionReportController extends Controller
+use PDF;
+class StockReportController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -15,7 +14,7 @@ class TransactionReportController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:cashier');
+        $this->middleware('auth:employee');
     }
 
     /**
@@ -25,13 +24,13 @@ class TransactionReportController extends Controller
      */
     public function index()
     {
-        return view('transaction-report.index');
+        return view('stock-report.index');
     }
 
     public function exportPDF()
     {
-        $transactions = Transaction::all();
-        $pdf = PDF::loadView('transaction-report.export-pdf', ['transactions' => $transactions]);
-        return $pdf->download('laporan-data-transaksi');
+        $stocks = Stock::all();
+        $pdf = PDF::loadView('stock-report.export-pdf', ['stocks' => $stocks]);
+        return $pdf->download('laporan-data-stok-barang');
     }
 }
